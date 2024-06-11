@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Nav } from './Nav'
+import axios from 'axios'
 
 export const Add = () => {
     const [data,setData]=useState(
@@ -15,6 +16,23 @@ export const Add = () => {
       }
       const readVlue=()=>{
         console.log(data)
+        axios.post("http://localhost:8080/add",data).then(
+          (response)=>{
+            console.log(response.data)
+            if (response.data.status=="success") {
+              alert("successfully added")
+              
+            } else {
+              alert("error")
+              
+            }
+          }
+        ).catch(
+          (error)=>{
+            console.log(error.message)
+            alert(error.map)
+          }
+        ).finally()
       }
   return (
     <div>
